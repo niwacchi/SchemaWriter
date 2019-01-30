@@ -11,6 +11,10 @@
 </head>
 <body>
   <p>
+    <select id="penType">
+      <option value="0">フリー</option>
+      <option value="0">直線</option>
+    </select>
     <select id="penColor">
       <option value="black">黒</option>
       <option value="red">赤</option>
@@ -38,6 +42,7 @@
             startY,
             x,
             y,
+            penType = 0,
             borderWidth = 10,
             isDrawing = false;
 
@@ -62,6 +67,10 @@
         })
         .mouseleave(function(){
           isDrawing = false;
+        });
+
+        $('#penType').change(function(){
+          penType = $(this).val();
         });
 
         $('#penColor').change(function(){
