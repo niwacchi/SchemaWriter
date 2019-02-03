@@ -33,16 +33,25 @@
   </canvas>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
-    let storedLines = [];
-    function Redraw(){
-      var canvas = document.getElementById('mycanvas');
-      var ctx = canvas.getContext('2d');
+    //直線用
+    var oldX = null;
+    var oldY = null;
+    var moveX = null;
+    var moveY = null;
+    var pX = null;
+    var pY = null;
+    var storedLines = [];
 
-      ctx.clearRect(0,0,canvas.width,canvas.height);
+    var canvas = document.getElementById('mycanvas');
+    var ctx = canvas.getContext('2d');
+
+    //直線描画処理用
+    function Redraw(){
+      //ctx.clearRect(0,0,canvas.width,canvas.height);
       if(storedLines.length == 0){
         return;
       }
-      for(let i = 0; i<storedLines.length; i++){
+      for(var i = 0; i<storedLines.length; i++){
         ctx.beginPath();
         ctx.moveTo(storedLines[i].x1, storedLines[i].y1);
         ctx.lineTo(storedLines[i].x2, storedLines[i].y2);
@@ -50,11 +59,12 @@
       }
     }
 
-    let penType = 0;
+    var penType = 0;
     $(function(){
-        var canvas = document.getElementById('mycanvas');
-        if(!canvas || !canvas.getContext) return false;
-        var ctx = canvas.getContext('2d');
+        if(!canvas || !canvas.getContext)
+        {
+          return false;
+        }
 
         var startX,
             startY,
@@ -109,13 +119,13 @@
         .mouseup(function(){
           isDrawing = false;
           if (penType == 1) {
-            x = e.offsetX;
-            y = e.offsetY;
+            pX = e.offsetX;
+            pY = e.offsetY;
             storedLines.push({
               x1: startX,
               y1: startY,
-              x2: x,
-              y2: y
+              x2: pX,
+              y2: pY
             })
           }
         })
