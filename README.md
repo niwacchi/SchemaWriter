@@ -1,5 +1,5 @@
-# JavaScript Schema Writeer
-- How to start built-in server
+# JavaScript Schema Writer
+## How to start built-in server
 ```sh
 node server.js
 ```
